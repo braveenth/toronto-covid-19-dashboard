@@ -1,5 +1,7 @@
-# toronto-covid-19-dashboard
-Ingesting various City of Toronto COVID-19 data sources into Elasticsearch in order to build a Kibana dashboard.
+# Toronto COVID-19 Dashboard
+Since the province of Ontario is going into another lockdown, I made the decision to create this project to practice cloud computing concepts (AWS, Docker), Infrastructure-as-Code (Terraform), and data ingestion/parsing/analysis (Elastic Stack, Python, RESTful APIs, Filebeat). 
+
+In this project, we are ingesting various City of Toronto COVID-19 data sources into Elasticsearch in order to build a Kibana dashboard.
 
 The goal of main.py is to parse the JSON file provided by the City of Toronto - COVID Cases so that the data can be shipped to ElasticSearch for further analysis.
 
