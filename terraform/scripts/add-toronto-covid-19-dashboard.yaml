@@ -1,0 +1,47 @@
+#cloud-config
+# Add groups to the system
+# Adds the ubuntu group with members 'root' and 'sys'
+# and the empty group hashicorp.
+groups:
+  - ubuntu: [root,sys]
+  - hashicorp
+  - elasticsearch
+
+# Add users to the system. Users are added after groups are added.
+users:
+  - default
+  - name: terraform
+    gecos: terraform
+    shell: /bin/bash
+    primary_group: hashicorp
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    groups: users, admin
+    lock_passwd: false
+    ssh_authorized_keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC9uPvE36H7b+0Nwoyot+dJiMR3LrruzaQSIHc4OE2fim6dSCMc8f4eZSwK1LwJ5PT17ou5R9Zy9tpWWOaZZukB0y5GiCDLvmoSIjvF+H0y3f9/tT+0p0Xbit53lCvnQQyQbzU/NFpQ8RcMxRPw8ZKyOwB5okvMn5dnr8YvY8ZW4wnjVnlTqEtW+MtJu1LBxmRS80YIZGXb+B2L0oZmin1TpAeVgxzLVAyfqq56zGpoK0JEr3OriLqGleFNh20k2s+ZFiDZf2LfLTDj0Kf1nezymKehnAGKdr27EqlIj+uXi08xLWOpm7wkHsD2n/Dala+jw1v5fXpkFWKePdEaFQk1fdLGVoehnIfAind8+lVYX/4B6W8olN/CDVLK6IIeMNnLbKB8xlx3DzTgfEhtEyImYlJcmMoJ0Vd2QLyDpVkMN8Kgme05b25ajLgxTTIwTDOz0udMvKYHDLj1D399UD5UmwE3F6qUPIy9Xxr6lhFbqs8Eq4ZfLHCOBjWAu99y8hs= braveenth@msn.com
+
+  - name: elasticsearch
+    gecos: elasticsearch
+    shell: /bin/bash
+    primary_group: elasticsearch
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    groups: users, admin
+    lock_passwd: false
+    ssh_authorized_keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC9uPvE36H7b+0Nwoyot+dJiMR3LrruzaQSIHc4OE2fim6dSCMc8f4eZSwK1LwJ5PT17ou5R9Zy9tpWWOaZZukB0y5GiCDLvmoSIjvF+H0y3f9/tT+0p0Xbit53lCvnQQyQbzU/NFpQ8RcMxRPw8ZKyOwB5okvMn5dnr8YvY8ZW4wnjVnlTqEtW+MtJu1LBxmRS80YIZGXb+B2L0oZmin1TpAeVgxzLVAyfqq56zGpoK0JEr3OriLqGleFNh20k2s+ZFiDZf2LfLTDj0Kf1nezymKehnAGKdr27EqlIj+uXi08xLWOpm7wkHsD2n/Dala+jw1v5fXpkFWKePdEaFQk1fdLGVoehnIfAind8+lVYX/4B6W8olN/CDVLK6IIeMNnLbKB8xlx3DzTgfEhtEyImYlJcmMoJ0Vd2QLyDpVkMN8Kgme05b25ajLgxTTIwTDOz0udMvKYHDLj1D399UD5UmwE3F6qUPIy9Xxr6lhFbqs8Eq4ZfLHCOBjWAu99y8hs= braveenth@msn.com
+
+# Download the packages
+packages:
+  - docker-compose
+
+runcmd:
+  - sudo su elasticsearch
+  - sudo mkdir /home/elasticsearch/git_repo
+  - sudo chown elasticsearch:elasticsearch /home/elasticsearch/git_repo
+  - sudo sysctl -w vm.max_map_count=262144
+  - sudo systemctl --now enable docker
+  - sudo usermod -aG docker elasticsearch
+  - git clone https://github.com/braveenth/toronto-covid-19-dashboard.git /home/elasticsearch/git_repo
+  - sudo chmod go-w /home/elasticsearch/git_repo/filebeat_configuration/filebeat.yml
+  - cd /home/elasticsearch/git_repo/ && docker-compose up
+
