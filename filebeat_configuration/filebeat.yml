@@ -11,8 +11,17 @@ filebeat.inputs:
 
   json.keys_under_root: true
   json.add_error_key: true
+  json.overwrite_keys: true
 
-#processors:
+processors:
+  # - timestamp:
+  #     field: reported_date
+  #     timezone: 'America/Toronto'
+  #     layouts:
+  #       - '2020-01-01T00:00:00-04:00'
+  # - drop_fields:
+  #     fields: [reported_date]
+
 #  - add_cloud_metadata: ~
 #  - add_docker_metadata: ~
 

@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 # The goal of this program is to parse the JSON file provided by the City of Toronto - COVID Cases so that the data can be shipped to ElasticSearch for further analysis
 import json
+#from datetime import datetime
+
 
 file_name = 'COVID19_cases.json'
 json_file = open(file_name, "r")
@@ -15,6 +17,13 @@ for item in json_data:
 	# We need to convert '_id' to 'message_id' since the '_id' field is reserved for use in Elasticsearch
 	# Reason provided by Filebeat: "Field [_id] is a metadata field and cannot be added inside a document
 	item['message_id'] = item.pop('_id')
+
+	# We are going to convert the dates to an ISO8601 format for ElasticSearch
+	# We can use isoformat() or append the required string
+	item['reported_date'] = item['Reported Date'] + 'T00:00:00-04:00'
+	item['@timestamp'] = item.pop('Reported Date') + 'T00:00:00.000Z'
+	item['episode_date'] = item.pop('Episode Date') + 'T00:00:00-04:00'
+
 	cases_file.write(str(json.dumps(item))+'\n')
 	#print(item)
 	print("Wrote item")
