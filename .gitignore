@@ -2,3 +2,7 @@
 ssh_key.pub
 tf-cloud-init.pub
 tf-cloud-init
+*.tfstate
+*.tfstate.backup
+.terraform
+.terraform.lock.hcl

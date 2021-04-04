@@ -21,7 +21,7 @@ for item in json_data:
 	# We are going to convert the dates to an ISO8601 format for ElasticSearch
 	# We can use isoformat() or append the required string
 	item['reported_date'] = item['Reported Date'] + 'T00:00:00-04:00'
-	item['@timestamp'] = item.pop('Reported Date') + 'T00:00:00.000Z'
+	item['@timestamp'] = item.pop('Reported Date') + 'T16:44:50.000Z'
 	item['episode_date'] = item.pop('Episode Date') + 'T00:00:00-04:00'
 
 	cases_file.write(str(json.dumps(item))+'\n')
