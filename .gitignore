@@ -6,3 +6,4 @@ tf-cloud-init
 *.tfstate.backup
 .terraform
 .terraform.lock.hcl
+output_toronto_covid_api.txt
