@@ -3,7 +3,7 @@ Since the province of Ontario is going into another lockdown, I made the decisio
 
 In this project, we are ingesting various City of Toronto COVID-19 data sources into Elasticsearch in order to build a Kibana dashboard.
 
-The goal of main.py is to parse the JSON file provided by the City of Toronto - COVID Cases so that the data can be shipped to ElasticSearch for further analysis.
+The goal of main.py is to parse the JSON file provided by the City of Toronto - COVID Cases so that the data can be shipped to Elasticsearch for further analysis.
 
 The docker-compose file sets up various components required so that ElasticSearch, Filebeat, and Kibana can work together to produce our desired results.
 
