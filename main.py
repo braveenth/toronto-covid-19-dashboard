@@ -4,13 +4,13 @@ import json
 #from datetime import datetime
 
 
-file_name = 'COVID19_cases.json'
+file_name = './output_curl.txt'
 json_file = open(file_name, "r")
 
 json_data = json.loads(json_file.read())
 
 # Write the JSON line by line
-cases_file = open("./covid_cases/output.txt", "w")
+cases_file = open("./output.txt", "w")
 
 for item in json_data:
 	# We need to format the JSON objects properly so that Filebeat and Elastic can parse it properly
