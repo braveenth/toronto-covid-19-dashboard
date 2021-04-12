@@ -71,17 +71,6 @@ services:
   kibana:
     image: docker.elastic.co/kibana/kibana:7.12.0
     container_name: kib01
-    # environment:
-    #   - node.name=kib01
-    #   - cluster.name=es-docker-cluster
-    #   - discovery.seed_hosts=es01,es02
-    #   - cluster.initial_master_nodes=es01,es02,es03
-    #   - bootstrap.memory_lock=true
-    #   - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-    # ulimits:
-    #   memlock:
-    #     soft: -1
-    #     hard: -1
     depends_on:
       - elasticsearch
       # - es02
@@ -158,7 +147,7 @@ services:
     image: docker.elastic.co/beats/filebeat:7.12.0
     container_name: filebeat
     volumes:
-      - toronto_covid_data:/filebeat_data
+      #- toronto_covid_data:/filebeat_data
       - ./filebeat_configuration/filebeat.yml:/usr/share/filebeat/filebeat.yml
       #- ./covid_cases:/var/log/covid_cases
       - toronto_covid_data:/var/log/covid_cases
