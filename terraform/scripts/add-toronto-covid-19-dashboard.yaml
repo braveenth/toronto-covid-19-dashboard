@@ -44,4 +44,5 @@ runcmd:
   - git clone https://github.com/braveenth/toronto-covid-19-dashboard.git /home/elasticsearch/git_repo
   - sudo chmod go-w /home/elasticsearch/git_repo/filebeat_configuration/filebeat.yml
   - cd /home/elasticsearch/git_repo/ && docker-compose up
+  - curl 'https://api.ipify.org?format=json' > /home/elasticsearch/ip
 
