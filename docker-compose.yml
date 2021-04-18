@@ -163,7 +163,7 @@ services:
     container_name: grafana
     volumes:
       #- toronto_covid_data:/filebeat_data
-      #- ./grafana_configuration/data/:/var/lib/grafana
+      - ./grafana_configuration/data/:/var/lib/grafana/test/
     depends_on:
       - torontocoviddata
       - kibana
