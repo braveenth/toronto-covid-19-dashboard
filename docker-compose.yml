@@ -157,6 +157,21 @@ services:
       - elasticsearch
     networks:
       - elastic
+      
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    volumes:
+      #- toronto_covid_data:/filebeat_data
+      #- ./grafana_configuration/data/:/var/lib/grafana
+    depends_on:
+      - torontocoviddata
+      - kibana
+      - elasticsearch
+    ports:
+      - 3000:3000
+    networks:
+      - elastic
 
 volumes:
   data01:
