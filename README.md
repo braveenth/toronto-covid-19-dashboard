@@ -16,3 +16,9 @@ Before doing this, you need to setup an SSH Key Pair and make sure that the Publ
 Here is a link to the City of Toronto's Open Data Portal: https://open.toronto.ca/
 
 Note: Information about COVID-19 cases is gathered through external resources. The information provided may not be accurate. Use at your own risk.
+
+
+### To-do:
+- [ ] Elastic Cloud Enterprise 7.12 Deployment using Terraform (3 nodes)
+- [ ] Grafana Dashboard with Time-Series Data
+- [ ] Add additional data sources from the City of Toronto, Province of Ontario, and Government of Canada
